@@ -16,9 +16,12 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <cstdlib>
+#include <iostream>
 
-// Here is a small helper for you ! Have a look.
 #include "ResourcePath.hpp"
+
+using namespace std;
 
 int main(int, char const**)
 {
@@ -38,7 +41,8 @@ int main(int, char const**)
         return EXIT_FAILURE;
     }
     sf::Sprite sprite(texture);
-    
+    sprite.setOrigin(sf::Vector2f(-350, -300));
+
     // Create a graphical text to display
     sf::Font sansationFont;
     if (!sansationFont.loadFromFile(resourcePath() + "sansation.ttf")) {
@@ -56,6 +60,8 @@ int main(int, char const**)
     // Play the music
 //    music.play();
 
+    window.setFramerateLimit(60);
+    
     // Start the game loop
     while (window.isOpen())
     {
@@ -72,26 +78,44 @@ int main(int, char const**)
 //            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Q) {
 //                window.close();
 //            }
-            
-            // Left button pressed
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            {
-                // left key is pressed: move our character
-                sprite.move(-1, 0);
-                
-            } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-                //move sprite right if right is press
-                sprite.move(1, 0);
-                
-            } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-                //move sprite down if down is pressed
-                sprite.move(0, 1);
-                
-            } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                // move sprite up if up is pressed
-                sprite.move(0, -1);
-            }
         }
+        
+        switch (event.key.code) {
+            case sf::Keyboard::Left:
+                sprite.move(-1, 0);
+                break;
+            case sf::Keyboard::Right:
+                sprite.move(1, 0);
+                break;
+            case sf::Keyboard::Down:
+                sprite.move(0, 1);
+                break;
+            case sf::Keyboard::Up:
+                sprite.move(0, -1);
+                break;
+            default:
+                break;
+        }
+        
+//        // Left button pressed
+//        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+//        {
+//            // left key is pressed: move our character
+//            sprite.move(-1, 0);
+//            
+//        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+//            //move sprite right if right is press
+//            sprite.move(1, 0);
+//            
+//        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+//            //move sprite down if down is pressed
+//            sprite.move(0, 1);
+//            
+//        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+//            // move sprite up if up is pressed
+//            sprite.move(0, -1);
+//        }
+
 
         // Clear screen
         window.clear();
