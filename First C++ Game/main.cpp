@@ -30,11 +30,11 @@ int main(int, char const**)
     sf::RenderWindow window(sf::VideoMode(576, 544), "My window");
 
     // Set the Icon
-//    sf::Image icon;
-//    if (!icon.loadFromFile(resourcePath() + "icon.png")) {
-//        return EXIT_FAILURE;
-//    }
-//    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    sf::Image icon;
+    if (!icon.loadFromFile(resourcePath() + "icon.png")) {
+        return EXIT_FAILURE;
+    }
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     const int level[] =
     {

@@ -10,10 +10,10 @@
 		161D9C5C1BBB88D700FD4DFB /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 161D9C5B1BBB88D700FD4DFB /* ResourcePath.mm */; };
 		161D9C5F1BBB88D700FD4DFB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 161D9C5E1BBB88D700FD4DFB /* main.cpp */; };
 		161D9C661BBB88D700FD4DFB /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 161D9C651BBB88D700FD4DFB /* sansation.ttf */; };
-		161D9C681BBB88D700FD4DFB /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 161D9C671BBB88D700FD4DFB /* icon.png */; };
 		161D9C6F1BBB8C3500FD4DFB /* sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 161D9C6E1BBB8C3500FD4DFB /* sprite.png */; settings = {ASSET_TAGS = (); }; };
 		163FB7301BBC729100413329 /* TileMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 163FB72E1BBC729100413329 /* TileMap.cpp */; settings = {ASSET_TAGS = (); }; };
 		163FB7421BBC8CDB00413329 /* tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 163FB7411BBC8CDB00413329 /* tileset.png */; settings = {ASSET_TAGS = (); }; };
+		163FB7441BBC90B200413329 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 163FB7431BBC90B200413329 /* icon.png */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,11 +23,11 @@
 		161D9C5D1BBB88D700FD4DFB /* ResourcePath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		161D9C5E1BBB88D700FD4DFB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		161D9C651BBB88D700FD4DFB /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
-		161D9C671BBB88D700FD4DFB /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		161D9C6E1BBB8C3500FD4DFB /* sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprite.png; sourceTree = "<group>"; };
 		163FB72E1BBC729100413329 /* TileMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileMap.cpp; sourceTree = "<group>"; };
 		163FB72F1BBC729100413329 /* TileMap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TileMap.hpp; sourceTree = "<group>"; };
 		163FB7411BBC8CDB00413329 /* tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileset.png; sourceTree = "<group>"; };
+		163FB7431BBC90B200413329 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +82,8 @@
 		161D9C601BBB88D700FD4DFB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				163FB7431BBC90B200413329 /* icon.png */,
 				161D9C651BBB88D700FD4DFB /* sansation.ttf */,
-				161D9C671BBB88D700FD4DFB /* icon.png */,
 				161D9C6E1BBB8C3500FD4DFB /* sprite.png */,
 				163FB7411BBC8CDB00413329 /* tileset.png */,
 			);
@@ -147,8 +147,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				163FB7441BBC90B200413329 /* icon.png in Resources */,
 				163FB7421BBC8CDB00413329 /* tileset.png in Resources */,
-				161D9C681BBB88D700FD4DFB /* icon.png in Resources */,
 				161D9C661BBB88D700FD4DFB /* sansation.ttf in Resources */,
 				161D9C6F1BBB8C3500FD4DFB /* sprite.png in Resources */,
 			);
