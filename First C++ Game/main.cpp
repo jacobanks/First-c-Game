@@ -21,6 +21,7 @@
 
 #include "ResourcePath.hpp"
 #include "TileMap.cpp"
+#include "Collision.hpp"
 
 using namespace std;
 
@@ -70,6 +71,10 @@ int main(int, char const**)
     sf::Sprite sprite(texture);
     sprite.setOrigin(sf::Vector2f(-256, -128));
 
+    sf::Sprite sprite2(texture);
+    sprite2.setOrigin(sf::Vector2f(-256, -158));
+    sprite2.setColor(sf::Color(255, 0, 0));
+    
     // Create a graphical text to display
     sf::Font sansationFont;
     if (!sansationFont.loadFromFile(resourcePath() + "sansation.ttf")) {
@@ -124,6 +129,10 @@ int main(int, char const**)
             default:
                 break;
         }
+        
+        if (Collision::BoundingBoxTest(sprite, sprite2)) {
+            cout << "collision!" << endl;
+        }
 
         // Clear screen
         window.clear();
@@ -133,6 +142,7 @@ int main(int, char const**)
 
         // Draw the sprite
         window.draw(sprite);
+        window.draw(sprite2);
         
         // Draw the string
         window.draw(text);
