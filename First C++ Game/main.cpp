@@ -20,13 +20,14 @@
 #include <iostream>
 
 #include "ResourcePath.hpp"
+#include "TileMap.cpp"
 
 using namespace std;
 
 int main(int, char const**)
 {
     // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+    sf::RenderWindow window(sf::VideoMode(576, 544), "My window");
 
     // Set the Icon
 //    sf::Image icon;
@@ -35,13 +36,39 @@ int main(int, char const**)
 //    }
 //    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
+    const int level[] =
+    {
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    };
+    
+    // create the tilemap from the level definition
+    TileMap map;
+    if (!map.load(resourcePath() + "pacman.png", sf::Vector2u(32, 32), level, 18, 17))
+        return -1;
+    
     // Load a sprite to display
     sf::Texture texture;
     if (!texture.loadFromFile(resourcePath() + "sprite.png", sf::IntRect(30, 30, 30, 30))) {
         return EXIT_FAILURE;
     }
     sf::Sprite sprite(texture);
-    sprite.setOrigin(sf::Vector2f(-350, -300));
+    sprite.setOrigin(sf::Vector2f(-256, -128));
 
     // Create a graphical text to display
     sf::Font sansationFont;
@@ -59,7 +86,7 @@ int main(int, char const**)
 
     // Play the music
 //    music.play();
-
+    
     window.setFramerateLimit(60);
     
     // Start the game loop
@@ -80,6 +107,7 @@ int main(int, char const**)
 //            }
         }
         
+        // move player on button click
         switch (event.key.code) {
             case sf::Keyboard::Left:
                 sprite.move(-1, 0);
@@ -96,33 +124,16 @@ int main(int, char const**)
             default:
                 break;
         }
-        
-//        // Left button pressed
-//        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-//        {
-//            // left key is pressed: move our character
-//            sprite.move(-1, 0);
-//            
-//        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-//            //move sprite right if right is press
-//            sprite.move(1, 0);
-//            
-//        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-//            //move sprite down if down is pressed
-//            sprite.move(0, 1);
-//            
-//        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-//            // move sprite up if up is pressed
-//            sprite.move(0, -1);
-//        }
-
 
         // Clear screen
         window.clear();
 
+        //Draw the map
+        window.draw(map);
+
         // Draw the sprite
         window.draw(sprite);
-
+        
         // Draw the string
         window.draw(text);
 
