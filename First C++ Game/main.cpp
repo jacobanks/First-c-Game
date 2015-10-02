@@ -137,15 +137,14 @@ int main(int, char const**)
                         break;
                 }
 
-            }
-
-            
-            sprite.setPosition(tileX * 32, tileY * 32);
-            int tileUnderPlayer = level[tileX + tileY * 16];
-            cout << tileUnderPlayer << endl;
-            
-            if (tileUnderPlayer == 9) {
-                cout << "Collided with a wall" << endl;
+                sprite.setPosition(tileX * 32, tileY * 32);
+                
+                int tileUnderPlayer = level[tileX + tileY * 18];
+                cout << tileUnderPlayer << endl;
+                
+                if (tileUnderPlayer == 9) {
+                    cout << "Collided with a wall" << endl;
+                }
             }
         }
         
