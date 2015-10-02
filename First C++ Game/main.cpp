@@ -60,8 +60,9 @@ int main(int, char const**)
     
     // create the tilemap from the level definition
     TileMap map;
-    if (!map.load(resourcePath() + "tileset.png", sf::Vector2u(32, 32), level, 18, 17))
+    if (!map.load(resourcePath() + "tileset.png", sf::Vector2u(32, 32), level, 18, 17)) {
         return -1;
+    }
     
     // Load a sprite to display
     sf::Texture texture;
@@ -69,8 +70,10 @@ int main(int, char const**)
         return EXIT_FAILURE;
     }
     sf::Sprite sprite(texture);
-    sprite.setOrigin(sf::Vector2f(-256, -128));
-
+    int tileX = -8;
+    int tileY = -4;
+    sprite.setOrigin(tileX, tileY);
+    
     sf::Sprite sprite2(texture);
     sprite2.setOrigin(sf::Vector2f(-256, -158));
     sprite2.setColor(sf::Color(255, 0, 0));
@@ -115,23 +118,29 @@ int main(int, char const**)
         // move player on button click
         switch (event.key.code) {
             case sf::Keyboard::Left:
-                sprite.move(-1, 0);
+                tileX -= 1;
                 break;
             case sf::Keyboard::Right:
-                sprite.move(1, 0);
+                tileX += 1;
                 break;
             case sf::Keyboard::Down:
-                sprite.move(0, 1);
+                tileY += 1;
                 break;
             case sf::Keyboard::Up:
-                sprite.move(0, -1);
+                tileY -= 1;
                 break;
             default:
                 break;
         }
+        sprite.setPosition(tileX * 16, tileY * 16);
+
         
+        int tileUnderPlayer = level[tileX + tileY * 16];
+        cout << tileUnderPlayer << endl;
+        
+        // check if player hit another sprite
         if (Collision::BoundingBoxTest(sprite, sprite2)) {
-            cout << "collision!" << endl;
+            cout << "collided with another sprite" << endl;
         }
 
         // Clear screen
@@ -142,6 +151,7 @@ int main(int, char const**)
 
         // Draw the sprite
         window.draw(sprite);
+        
         window.draw(sprite2);
         
         // Draw the string
@@ -153,3 +163,5 @@ int main(int, char const**)
 
     return EXIT_SUCCESS;
 }
+
+
