@@ -70,8 +70,8 @@ int main(int, char const**)
         return EXIT_FAILURE;
     }
     sf::Sprite sprite(texture);
-    int tileX = -8;
-    int tileY = -4;
+    int tileX = 0;
+    int tileY = 0;
     sprite.setOrigin(tileX * 32, tileY * 32);
     
     sf::Sprite sprite2(texture);
@@ -115,29 +115,39 @@ int main(int, char const**)
 //            }
             
             // move player on button click
-            switch (event.key.code) {
-                case sf::Keyboard::Left:
-                    tileX -= 1;
-                    break;
-                case sf::Keyboard::Right:
-                    tileX += 1;
-                    break;
-                case sf::Keyboard::Down:
-                    tileY += 1;
-                    break;
-                case sf::Keyboard::Up:
-                    tileY -= 1;
-                    break;
-                default:
-                    break;
+            if (event.type == sf::Event::KeyPressed) {
+                switch (event.key.code) {
+                    case sf::Keyboard::Left:
+                        tileX -= 1;
+                        cout << tileX << ", " << tileY << endl;
+                        break;
+                    case sf::Keyboard::Right:
+                        tileX += 1;
+                        cout << tileX << ", " << tileY << endl;
+                        break;
+                    case sf::Keyboard::Down:
+                        tileY += 1;
+                        cout << tileX << ", " << tileY << endl;
+                        break;
+                    case sf::Keyboard::Up:
+                        tileY -= 1;
+                        cout << tileX << ", " << tileY << endl;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            
+            sprite.setPosition(tileX * 32, tileY * 32);
+            int tileUnderPlayer = level[tileX + tileY * 16];
+            cout << tileUnderPlayer << endl;
+            
+            if (tileUnderPlayer == 9) {
+                cout << "Collided with a wall" << endl;
             }
         }
-        
-        sprite.setPosition(tileX * 16, tileY * 16);
-
-        
-        int tileUnderPlayer = level[tileX + tileY * 16];
-        cout << tileUnderPlayer << endl;
         
         // check if player hit another sprite
         if (Collision::BoundingBoxTest(sprite, sprite2)) {
@@ -164,5 +174,3 @@ int main(int, char const**)
 
     return EXIT_SUCCESS;
 }
-
-
