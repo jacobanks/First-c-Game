@@ -72,7 +72,7 @@ int main(int, char const**)
     sf::Sprite sprite(texture);
     int tileX = -8;
     int tileY = -4;
-    sprite.setOrigin(tileX, tileY);
+    sprite.setOrigin(tileX * 32, tileY * 32);
     
     sf::Sprite sprite2(texture);
     sprite2.setOrigin(sf::Vector2f(-256, -158));
@@ -113,25 +113,26 @@ int main(int, char const**)
 //            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Q) {
 //                window.close();
 //            }
+            
+            // move player on button click
+            switch (event.key.code) {
+                case sf::Keyboard::Left:
+                    tileX -= 1;
+                    break;
+                case sf::Keyboard::Right:
+                    tileX += 1;
+                    break;
+                case sf::Keyboard::Down:
+                    tileY += 1;
+                    break;
+                case sf::Keyboard::Up:
+                    tileY -= 1;
+                    break;
+                default:
+                    break;
+            }
         }
         
-        // move player on button click
-        switch (event.key.code) {
-            case sf::Keyboard::Left:
-                tileX -= 1;
-                break;
-            case sf::Keyboard::Right:
-                tileX += 1;
-                break;
-            case sf::Keyboard::Down:
-                tileY += 1;
-                break;
-            case sf::Keyboard::Up:
-                tileY -= 1;
-                break;
-            default:
-                break;
-        }
         sprite.setPosition(tileX * 16, tileY * 16);
 
         
