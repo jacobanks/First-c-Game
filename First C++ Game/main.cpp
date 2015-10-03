@@ -79,12 +79,12 @@ int main(int, char const**)
     sprite2.setColor(sf::Color(255, 0, 0));
     
     // Create a graphical text to display
-    sf::Font sansationFont;
-    if (!sansationFont.loadFromFile(resourcePath() + "sansation.ttf")) {
-        return EXIT_FAILURE;
-    }
-    sf::Text text("First c++ Game", sansationFont, 30);
-    text.setColor(sf::Color::White);
+//    sf::Font sansationFont;
+//    if (!sansationFont.loadFromFile(resourcePath() + "sansation.ttf")) {
+//        return EXIT_FAILURE;
+//    }
+//    sf::Text text("First c++ Game", sansationFont, 30);
+//    text.setColor(sf::Color::White);
 
     // Load a music to play
 //    sf::Music music;
@@ -110,27 +110,30 @@ int main(int, char const**)
             }
 
             // Escape pressed: exit
-//            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Q) {
-//                window.close();
-//            }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Q) {
+                window.close();
+            }
             
             // move player on button click
             if (event.type == sf::Event::KeyPressed) {
                 
-                int tileUnderPlayer;
-                
-                if (event.key.code == sf::Keyboard::Left) {
+                // left button clicked
+                if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A) {
+                    // get next tile position
                     int nextX = tileX - 1;
                     int nextY = tileY;
                     
                     int nextTile = level[nextX + nextY * 18];
+                    // if next tile is 0 then move left else do nothing
                     if (nextTile != 0) {
                         cout << "Collided with a wall" << endl;
                     } else {
                         tileX -= 1;
+                        sprite.setPosition(tileX * 32, tileY * 32);
                     }
                     
-                } else if (event.key.code == sf::Keyboard::Right) {
+                // right button clicked
+                } else if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D) {
                     int nextX = tileX + 1;
                     int nextY = tileY;
                     
@@ -139,9 +142,12 @@ int main(int, char const**)
                         cout << "Collided with a wall" << endl;
                     } else {
                         tileX += 1;
-                    }
+                        sprite.setPosition(tileX * 32, tileY * 32);
 
-                } else if (event.key.code == sf::Keyboard::Down) {
+                    }
+                    
+                // down button clicked
+                } else if (event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S) {
                     int nextX = tileX;
                     int nextY = tileY + 1;
                     
@@ -150,9 +156,12 @@ int main(int, char const**)
                         cout << "Collided with a wall" << endl;
                     } else {
                         tileY += 1;
+                        sprite.setPosition(tileX * 32, tileY * 32);
+
                     }
 
-                } else if (event.key.code == sf::Keyboard::Up) {
+                // up button clicked
+                } else if (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::W) {
                     int nextX = tileX;
                     int nextY = tileY - 1;
                     
@@ -161,11 +170,11 @@ int main(int, char const**)
                         cout << "Collided with a wall" << endl;
                     } else {
                         tileY -= 1;
+                        sprite.setPosition(tileX * 32, tileY * 32);
+
                     }
 
                 }
-
-                sprite.setPosition(tileX * 32, tileY * 32);
             }
         }
         
@@ -185,9 +194,6 @@ int main(int, char const**)
         window.draw(sprite);
         
         window.draw(sprite2);
-        
-        // Draw the string
-        window.draw(text);
 
         // Update the window
         window.display();
