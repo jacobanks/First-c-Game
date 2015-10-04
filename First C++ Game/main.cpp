@@ -23,40 +23,202 @@
 #include "TileMap.cpp"
 #include "Collision.hpp"
 
-using namespace std;
+sf::RenderWindow window(sf::VideoMode(576, 544),"title");
+sf::Event event;
 
-int main(int, char const**)
+int tilesize = 32;
+const int level[] =
 {
-    // Create the main window
-    sf::RenderWindow window(sf::VideoMode(576, 544), "My window");
+    9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
+    9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
+    9, 0,10, 0, 1, 2, 0,10, 0, 1, 2, 0,10, 0, 1, 2, 0, 9,
+    9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
+    9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
+    9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
+    9, 0,11, 0, 4, 3, 0,11, 0, 4, 3, 0,11, 0, 4, 3, 0, 9,
+    9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
+    9, 0, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 0, 9,
+    9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
+    9, 0,10, 0, 1, 2, 0,10, 0, 1, 2, 0,10, 0, 1, 2, 0, 9,
+    9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
+    9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
+    9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
+    9, 0,11, 0, 4, 3, 0,11, 0, 4, 3, 0,11, 0, 4, 3, 0, 9,
+    9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
+    9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
+};
 
-    // Set the Icon
-    sf::Image icon;
-    if (!icon.loadFromFile(resourcePath() + "icon.png")) {
-        return EXIT_FAILURE;
-    }
-    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-
-    const int level[] =
+class character
+{
+public:
+    character()
     {
-        9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
-        9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
-        9, 0,10, 0, 1, 2, 0,10, 0, 1, 2, 0,10, 0, 1, 2, 0, 9,
-        9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
-        9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
-        9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
-        9, 0,11, 0, 4, 3, 0,11, 0, 4, 3, 0,11, 0, 4, 3, 0, 9,
-        9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
-        9, 0, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 0, 9,
-        9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
-        9, 0,10, 0, 1, 2, 0,10, 0, 1, 2, 0,10, 0, 1, 2, 0, 9,
-        9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
-        9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
-        9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
-        9, 0,11, 0, 4, 3, 0,11, 0, 4, 3, 0,11, 0, 4, 3, 0, 9,
-        9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
-        9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
-    };
+        x = 32;
+        y = 32;
+        
+        // in this case, every loop, it will walk 2 pixels.
+        //if u put 50 as movespeed, it will walk 1 pixel each loop
+        movespeed = 50.0 / tilesize;
+        
+        for(int i = 0; i < 4; ++i) //initialize the all move booleans to false
+            move[i] = false;
+        
+        walking = false;
+        myrect.setSize(sf::Vector2f(32, 32));
+    }
+    
+    void keymove(); //keypress detection
+    void moving(); //moving if "walking" boolean is true
+    
+    float x;
+    float y;
+    float movespeed; //sets the movespeed
+    
+    enum MOVE {UP,DOWN,LEFT,RIGHT}; //enums instead of remember numbers
+    bool move[4]; //deciding if u move up/down/left/right
+    bool walking;
+    int nextspot; //the next tilespot of the map
+    
+    sf::RectangleShape myrect;
+};
+
+void character::keymove()
+{
+    /*keymove() and moving() functions are working together*/
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    {
+        if(walking == false)
+        {
+            /*if you click up, the the nextspot will of course be 32
+             pixels above yourself, so thats why nextspot = y - tilsize*/
+            nextspot = y - tilesize;
+            
+            int nextX = x / 32;
+            int nextY = (y / 32) - 1;
+            int nextTile = level[nextX + nextY * 18];
+            std::cout << nextTile << std::endl;
+
+            if (nextTile != 0) { /* do nothing */ }
+            else {
+                move[UP] = true;
+                walking = true;
+            }
+        }
+    }
+    
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    {
+        if(walking == false)
+        {
+            nextspot = y + tilesize;
+            
+            int nextX = x / 32;
+            int nextY = (y / 32) + 1;
+            int nextTile = level[nextX + nextY * 18];
+            std::cout << nextTile << std::endl;
+
+            if (nextTile != 0) { /* do nothing */ }
+            else {
+                move[DOWN] = true;
+                walking = true;
+            }
+        }
+    }
+    
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    {
+        if(walking == false)
+        {
+            nextspot = x - tilesize;
+            
+            int nextX = (x / 32) - 1;
+            int nextY = y / 32;
+            int nextTile = level[nextX + nextY * 18];
+            std::cout << nextTile << std::endl;
+
+            if (nextTile != 0) { /* do nothing */ }
+            else {
+                move[LEFT] = true;
+                walking = true;
+            }
+        }
+    }
+    
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    {
+        if(walking == false)
+        {
+            nextspot = x + tilesize;
+            
+            int nextX = (x / 32) + 1;
+            int nextY = y / 32;
+            int nextTile = level[nextX + nextY * 18];
+            std::cout << nextTile << std::endl;
+
+            if (nextTile != 0) { /* do nothing */ }
+            else {
+                move[RIGHT] = true;
+                walking = true;
+            }
+
+        }
+    }
+}
+void character::moving()
+{
+    if(walking == true)
+    {
+        if(move[UP] == true)
+        {
+            y -= movespeed;
+            
+            /* i do <= and not just == because maybe your movespeed has a
+             decimalpoint and then it wont become the same number as nextspot*/
+            if(y <= nextspot)
+            {
+                y = nextspot;
+                walking = false;
+                move[UP] = false;
+            }
+        }
+        
+        if(move[DOWN] == true)
+        {
+            y += movespeed;
+            if(y >= nextspot)
+            {
+                y = nextspot;
+                walking = false;
+                move[DOWN] = false;
+            }
+        }
+        if(move[LEFT] == true)
+        {
+            x -= movespeed;
+            if(x <= nextspot)
+            {
+                x = nextspot;
+                walking = false;
+                move[LEFT] = false;
+            }
+        }
+        if(move[RIGHT] == true)
+        {
+            x += movespeed;
+            if(x >= nextspot)
+            {
+                x = nextspot;
+                walking = false;
+                move[RIGHT] = false;
+            }
+        }
+    }
+}
+int main()
+{
+    window.setVerticalSyncEnabled(true); // 60 fps
+    character pacman; // a squared pacman
+    pacman.myrect.setFillColor(sf::Color(255,255,0));
     
     // create the tilemap from the level definition
     TileMap map;
@@ -64,140 +226,35 @@ int main(int, char const**)
         return -1;
     }
     
-    // Load a sprite to display
-    sf::Texture texture;
-    if (!texture.loadFromFile(resourcePath() + "sprite.png", sf::IntRect(30, 30, 30, 30))) {
+    // Set the Icon
+    sf::Image icon;
+    if (!icon.loadFromFile(resourcePath() + "icon.png")) {
         return EXIT_FAILURE;
     }
-    sf::Sprite sprite(texture);
-    int tileX = 8;
-    int tileY = 7;
-    sprite.setPosition(tileX * 32, tileY * 32);
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
     
-    sf::Sprite sprite2(texture);
-    sprite2.setOrigin(sf::Vector2f(-256, -158));
-    sprite2.setColor(sf::Color(255, 0, 0));
-    
-    // Create a graphical text to display
-//    sf::Font sansationFont;
-//    if (!sansationFont.loadFromFile(resourcePath() + "sansation.ttf")) {
-//        return EXIT_FAILURE;
-//    }
-//    sf::Text text("First c++ Game", sansationFont, 30);
-//    text.setColor(sf::Color::White);
-
-    // Load a music to play
-//    sf::Music music;
-//    if (!music.openFromFile(resourcePath() + "nice_music.ogg")) {
-//        return EXIT_FAILURE;
-//    }
-
-    // Play the music
-//    music.play();
-    
-    window.setFramerateLimit(60);
-    
-    // Start the game loop
-    while (window.isOpen())
+    while(window.isOpen())
     {
-        // Process events
-        sf::Event event;
-        while (window.pollEvent(event))
+        while(window.pollEvent(event))
         {
-            // Close window: exit
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            }
-
-            // Escape pressed: exit
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Q) {
-                window.close();
-            }
-            
-            // move player on button click
-            if (event.type == sf::Event::KeyPressed) {
-                
-                // left button clicked
-                if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A) {
-                    // get next tile position
-                    int nextX = tileX - 1;
-                    int nextY = tileY;
-                    
-                    int nextTile = level[nextX + nextY * 18];
-                    // if next tile is 0 then move left else do nothing
-                    if (nextTile != 0) {
-                        cout << "Collided with a wall" << endl;
-                    } else {
-                        tileX -= 1;
-                        sprite.setPosition(tileX * 32, tileY * 32);
-                    }
-                    
-                // right button clicked
-                } else if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D) {
-                    int nextX = tileX + 1;
-                    int nextY = tileY;
-                    
-                    int nextTile = level[nextX + nextY * 18];
-                    if (nextTile != 0) {
-                        cout << "Collided with a wall" << endl;
-                    } else {
-                        tileX += 1;
-                        sprite.setPosition(tileX * 32, tileY * 32);
-
-                    }
-                    
-                // down button clicked
-                } else if (event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S) {
-                    int nextX = tileX;
-                    int nextY = tileY + 1;
-                    
-                    int nextTile = level[nextX + nextY * 18];
-                    if (nextTile != 0) {
-                        cout << "Collided with a wall" << endl;
-                    } else {
-                        tileY += 1;
-                        sprite.setPosition(tileX * 32, tileY * 32);
-
-                    }
-
-                // up button clicked
-                } else if (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::W) {
-                    int nextX = tileX;
-                    int nextY = tileY - 1;
-                    
-                    int nextTile = level[nextX + nextY * 18];
-                    if (nextTile != 0) {
-                        cout << "Collided with a wall" << endl;
-                    } else {
-                        tileY -= 1;
-                        sprite.setPosition(tileX * 32, tileY * 32);
-
-                    }
-
-                }
-            }
+            if(event.type == sf::Event::Closed) window.close();
         }
         
+        pacman.keymove();
+        pacman.moving();
+        pacman.myrect.setPosition(pacman.x, pacman.y);
         
-        // check if player hit another sprite
-        if (Collision::BoundingBoxTest(sprite, sprite2)) {
-            cout << "collided with another sprite" << endl;
-        }
-
-        // Clear screen
         window.clear();
-
-        //Draw the map
+        
+        // draw tilemap
         window.draw(map);
 
-        // Draw the sprite
-        window.draw(sprite);
+        // draw pacman
+        window.draw(pacman.myrect);
         
-        window.draw(sprite2);
-
-        // Update the window
         window.display();
     }
-
+    
     return EXIT_SUCCESS;
 }
+
