@@ -23,7 +23,7 @@
 #include "TileMap.cpp"
 #include "Collision.hpp"
 
-sf::RenderWindow window(sf::VideoMode(576, 544),"title");
+sf::RenderWindow window(sf::VideoMode(576, 544), "pacman");
 sf::Event event;
 
 int tilesize = 32;
@@ -53,8 +53,8 @@ class character
 public:
     character()
     {
-        x = 32;
-        y = 32;
+        x = 256;
+        y = 224;
         
         // in this case, every loop, it will walk 2 pixels.
         //if u put 50 as movespeed, it will walk 1 pixel each loop
@@ -85,7 +85,7 @@ public:
 void character::keymove()
 {
     /*keymove() and moving() functions are working together*/
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         if(walking == false)
         {
@@ -96,7 +96,6 @@ void character::keymove()
             int nextX = x / 32;
             int nextY = (y / 32) - 1;
             int nextTile = level[nextX + nextY * 18];
-            std::cout << nextTile << std::endl;
 
             if (nextTile != 0) { /* do nothing */ }
             else {
@@ -106,7 +105,7 @@ void character::keymove()
         }
     }
     
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
         if(walking == false)
         {
@@ -115,7 +114,6 @@ void character::keymove()
             int nextX = x / 32;
             int nextY = (y / 32) + 1;
             int nextTile = level[nextX + nextY * 18];
-            std::cout << nextTile << std::endl;
 
             if (nextTile != 0) { /* do nothing */ }
             else {
@@ -125,7 +123,7 @@ void character::keymove()
         }
     }
     
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         if(walking == false)
         {
@@ -134,7 +132,6 @@ void character::keymove()
             int nextX = (x / 32) - 1;
             int nextY = y / 32;
             int nextTile = level[nextX + nextY * 18];
-            std::cout << nextTile << std::endl;
 
             if (nextTile != 0) { /* do nothing */ }
             else {
@@ -144,7 +141,7 @@ void character::keymove()
         }
     }
     
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         if(walking == false)
         {
@@ -153,7 +150,6 @@ void character::keymove()
             int nextX = (x / 32) + 1;
             int nextY = y / 32;
             int nextTile = level[nextX + nextY * 18];
-            std::cout << nextTile << std::endl;
 
             if (nextTile != 0) { /* do nothing */ }
             else {
