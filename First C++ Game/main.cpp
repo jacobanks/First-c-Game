@@ -54,7 +54,7 @@ public:
     character()
     {
         x = 256;
-        y = 224;
+        y = 288;
         
         // in this case, every loop, it will walk 2 pixels.
         //if u put 50 as movespeed, it will walk 1 pixel each loop
@@ -231,16 +231,20 @@ int main()
         return EXIT_FAILURE;
     }
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-    
+    std::cout << pacman.x << ", " << pacman.y << std::endl;
     int x = 1;
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 17; j++) {
             int tile = level[i + j * 18];
-            if (tile == 0) {
+            
+            sf::Vector2f point(i * 32 , j * 32);
+            sf::Vector2f pacmanPosition(pacman.x, pacman.y);
+
+            if (tile == 0 && point != pacmanPosition) {
                 int xCord = i * 32;
                 int yCord = j * 32;
                 x++;
-//                std::cout << xCord << ", " << yCord << std::endl;
+                std::cout << xCord << ", " << yCord << std::endl;
                 dots[x].setSize(sf::Vector2f(10, 10));
                 dots[x].setOrigin(sf::Vector2f(-10, -10));
                 dots[x].setPosition(xCord, yCord);
