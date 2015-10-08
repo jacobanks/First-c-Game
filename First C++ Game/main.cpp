@@ -89,7 +89,7 @@ void character::keymove()
     {
         if(walking == false)
         {
-            /*if you click up, the the nextspot will of course be 32
+            /*if you click up, the nextspot will of course be 32
              pixels above yourself, so thats why nextspot = y - tilsize*/
             nextspot = y - tilesize;
             
@@ -216,6 +216,9 @@ int main()
     character pacman; // a squared pacman
     pacman.myrect.setFillColor(sf::Color(255,255,0));
     
+    sf::RectangleShape rectangle;
+    std::vector<sf::RectangleShape> dots(150, sf::RectangleShape(rectangle));
+    
     // create the tilemap from the level definition
     TileMap map;
     if (!map.load(resourcePath() + "tileset.png", sf::Vector2u(32, 32), level, 18, 17)) {
@@ -228,6 +231,22 @@ int main()
         return EXIT_FAILURE;
     }
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    
+    int x = 1;
+    for (int i = 0; i < 18; i++) {
+        for (int j = 0; j < 17; j++) {
+            int tile = level[i + j * 18];
+            if (tile == 0) {
+                int xCord = i * 32;
+                int yCord = j * 32;
+                x++;
+//                std::cout << xCord << ", " << yCord << std::endl;
+                dots[x].setSize(sf::Vector2f(10, 10));
+                dots[x].setOrigin(sf::Vector2f(-10, -10));
+                dots[x].setPosition(xCord, yCord);
+            }
+        }
+    }
     
     while(window.isOpen())
     {
@@ -245,9 +264,15 @@ int main()
         // draw tilemap
         window.draw(map);
 
+        // draw dots to collect
+        for(int i = 0; i < dots.size(); i++)
+        {
+            window.draw(dots[i]);
+        }
+        
         // draw pacman
         window.draw(pacman.myrect);
-        
+
         window.display();
     }
     
