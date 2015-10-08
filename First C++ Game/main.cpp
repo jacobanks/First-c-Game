@@ -231,7 +231,7 @@ int main()
         return EXIT_FAILURE;
     }
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-    std::cout << pacman.x << ", " << pacman.y << std::endl;
+
     int x = 1;
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 17; j++) {
@@ -244,7 +244,9 @@ int main()
                 int xCord = i * 32;
                 int yCord = j * 32;
                 x++;
-                std::cout << xCord << ", " << yCord << std::endl;
+                
+//                std::cout << xCord << ", " << yCord << std::endl;
+                
                 dots[x].setSize(sf::Vector2f(10, 10));
                 dots[x].setOrigin(sf::Vector2f(-10, -10));
                 dots[x].setPosition(xCord, yCord);
