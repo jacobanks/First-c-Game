@@ -210,6 +210,7 @@ void character::moving()
         }
     }
 }
+
 int main()
 {
     window.setVerticalSyncEnabled(true); // 60 fps
@@ -217,7 +218,7 @@ int main()
     pacman.myrect.setFillColor(sf::Color(255,255,0));
     
     sf::RectangleShape rectangle;
-    std::vector<sf::RectangleShape> dots(150, sf::RectangleShape(rectangle));
+    std::vector<sf::RectangleShape> dot(150, sf::RectangleShape(rectangle));
     
     // create the tilemap from the level definition
     TileMap map;
@@ -247,9 +248,9 @@ int main()
                 
 //                std::cout << xCord << ", " << yCord << std::endl;
                 
-                dots[x].setSize(sf::Vector2f(10, 10));
-                dots[x].setOrigin(sf::Vector2f(-10, -10));
-                dots[x].setPosition(xCord, yCord);
+                dot[x].setSize(sf::Vector2f(10, 10));
+                dot[x].setOrigin(sf::Vector2f(-10, -10));
+                dot[x].setPosition(xCord, yCord);
             }
         }
     }
@@ -271,9 +272,14 @@ int main()
         window.draw(map);
 
         // draw dots to collect
-        for(int i = 0; i < dots.size(); i++)
+        for(int i = 0; i < dot.size(); i++)
         {
-            window.draw(dots[i]);
+            window.draw(dot[i]);
+            
+            if (Collision::intersects(pacman.myrect.getGlobalBounds(), dot[i].getGlobalBounds())) {
+                std::cout << "collision! with dot " << i << std::endl;
+                dot[i].setFillColor(sf::Color(0, 255, 0));
+            }
         }
         
         // draw pacman

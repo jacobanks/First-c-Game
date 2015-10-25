@@ -45,6 +45,8 @@ namespace Collision {
     /// Supports scaling and rotation
     //////
     bool BoundingBoxTest(const sf::Sprite& Object1, const sf::Sprite& Object2);
+    
+    bool intersects(const sf::FloatRect& rect1, const sf::FloatRect& rect2);
 }
 
 #endif  /* COLLISION_H */
