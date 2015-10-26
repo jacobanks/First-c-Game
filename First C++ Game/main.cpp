@@ -247,6 +247,16 @@ int main()
     scoreText.setColor(sf::Color::White);
     scoreText.setPosition(sf::Vector2f(32, 0));
     
+    sf::Text winText;
+    winText.setFont(arcadeFont);
+    winText.setString("Game Over! You Win!");
+    winText.setCharacterSize(45);
+    winText.setColor(sf::Color::White);
+    sf::FloatRect textRect = winText.getLocalBounds();
+    winText.setOrigin(textRect.left + textRect.width/2.0f,
+                   textRect.top  + textRect.height/2.0f);
+    winText.setPosition(sf::Vector2f(576/2.0f, 544/2.0f));
+    
     int x = 1;
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 17; j++) {
@@ -304,6 +314,11 @@ int main()
 
         // draw text
         window.draw(scoreText);
+        
+        // draw win text if everything is collected
+        if (scoreInt == 1350) {
+            window.draw(winText);
+        }
         
         window.display();
     }
