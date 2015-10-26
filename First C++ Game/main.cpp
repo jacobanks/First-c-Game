@@ -241,7 +241,7 @@ int main()
             sf::Vector2f point(i * 32 , j * 32);
             sf::Vector2f pacmanPosition(pacman.x, pacman.y);
 
-            if (tile == 0 && point != pacmanPosition) {
+            if (tile == 0) {
                 int xCord = i * 32;
                 int yCord = j * 32;
                 x++;
@@ -251,6 +251,8 @@ int main()
                 dot[x].setSize(sf::Vector2f(10, 10));
                 dot[x].setOrigin(sf::Vector2f(-10, -10));
                 dot[x].setPosition(xCord, yCord);
+                dot[x].setFillColor(sf::Color(212, 161, 144));
+
             }
         }
     }
@@ -274,11 +276,14 @@ int main()
         // draw dots to collect
         for(int i = 0; i < dot.size(); i++)
         {
-            window.draw(dot[i]);
-            
             if (Collision::intersects(pacman.myrect.getGlobalBounds(), dot[i].getGlobalBounds())) {
-                std::cout << "collision! with dot " << i << std::endl;
-                dot[i].setFillColor(sf::Color(0, 255, 0));
+//                std::cout << "collision! with dot " << i << std::endl;
+                dot[i].setFillColor(sf::Color(0, 0, 0, 0));
+
+            } else {
+                if (i != 68) {
+                    window.draw(dot[i]);
+                }
             }
         }
         
