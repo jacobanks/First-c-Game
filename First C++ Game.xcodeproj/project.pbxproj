@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		161D9C5C1BBB88D700FD4DFB /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 161D9C5B1BBB88D700FD4DFB /* ResourcePath.mm */; };
 		161D9C5F1BBB88D700FD4DFB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 161D9C5E1BBB88D700FD4DFB /* main.cpp */; };
-		161D9C661BBB88D700FD4DFB /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 161D9C651BBB88D700FD4DFB /* sansation.ttf */; };
 		162D164F1BBC9DC10041AD24 /* Collision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 162D164D1BBC9DC10041AD24 /* Collision.cpp */; };
 		163FB7301BBC729100413329 /* TileMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 163FB72E1BBC729100413329 /* TileMap.cpp */; };
 		163FB7421BBC8CDB00413329 /* tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 163FB7411BBC8CDB00413329 /* tileset.png */; };
 		163FB7441BBC90B200413329 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 163FB7431BBC90B200413329 /* icon.png */; };
+		16965AC01BDDE06F00B3D7B0 /* ARCADECLASSIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 16965ABF1BDDE06F00B3D7B0 /* ARCADECLASSIC.TTF */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,13 +22,13 @@
 		161D9C5B1BBB88D700FD4DFB /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		161D9C5D1BBB88D700FD4DFB /* ResourcePath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		161D9C5E1BBB88D700FD4DFB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		161D9C651BBB88D700FD4DFB /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
 		162D164D1BBC9DC10041AD24 /* Collision.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Collision.cpp; sourceTree = "<group>"; };
 		162D164E1BBC9DC10041AD24 /* Collision.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Collision.hpp; sourceTree = "<group>"; };
 		163FB72E1BBC729100413329 /* TileMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileMap.cpp; sourceTree = "<group>"; };
 		163FB72F1BBC729100413329 /* TileMap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TileMap.hpp; sourceTree = "<group>"; };
 		163FB7411BBC8CDB00413329 /* tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileset.png; sourceTree = "<group>"; };
 		163FB7431BBC90B200413329 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		16965ABF1BDDE06F00B3D7B0 /* ARCADECLASSIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = ARCADECLASSIC.TTF; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +85,8 @@
 		161D9C601BBB88D700FD4DFB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				16965ABF1BDDE06F00B3D7B0 /* ARCADECLASSIC.TTF */,
 				163FB7431BBC90B200413329 /* icon.png */,
-				161D9C651BBB88D700FD4DFB /* sansation.ttf */,
 				163FB7411BBC8CDB00413329 /* tileset.png */,
 			);
 			name = Resources;
@@ -149,9 +149,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16965AC01BDDE06F00B3D7B0 /* ARCADECLASSIC.TTF in Resources */,
 				163FB7441BBC90B200413329 /* icon.png in Resources */,
 				163FB7421BBC8CDB00413329 /* tileset.png in Resources */,
-				161D9C661BBB88D700FD4DFB /* sansation.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
