@@ -56,9 +56,7 @@ public:
         x = 256;
         y = 288;
         
-        // in this case, every loop, it will walk 2 pixels.
-        //if u put 50 as movespeed, it will walk 1 pixel each loop
-        movespeed = 50.0 / tilesize;
+        movespeed = 80.0 / tilesize;
         
         for(int i = 0; i < 4; ++i) //initialize the all move booleans to false
             move[i] = false;
@@ -89,16 +87,15 @@ void character::keymove()
     {
         if(walking == false)
         {
-            /*if you click up, the nextspot will of course be 32
-             pixels above yourself, so thats why nextspot = y - tilsize*/
-            nextspot = y - tilesize;
-            
             int nextX = x / 32;
             int nextY = (y / 32) - 1;
             int nextTile = level[nextX + nextY * 18];
 
             if (nextTile != 0) { /* do nothing */ }
-            else {
+            else if (move[UP] != true){
+                move[DOWN] = false;
+                move[LEFT] = false;
+                move[RIGHT] = false;
                 move[UP] = true;
                 walking = true;
             }
@@ -109,14 +106,15 @@ void character::keymove()
     {
         if(walking == false)
         {
-            nextspot = y + tilesize;
-            
             int nextX = x / 32;
             int nextY = (y / 32) + 1;
             int nextTile = level[nextX + nextY * 18];
 
             if (nextTile != 0) { /* do nothing */ }
             else {
+                move[LEFT] = false;
+                move[RIGHT] = false;
+                move[UP] = false;
                 move[DOWN] = true;
                 walking = true;
             }
@@ -127,14 +125,15 @@ void character::keymove()
     {
         if(walking == false)
         {
-            nextspot = x - tilesize;
-            
             int nextX = (x / 32) - 1;
             int nextY = y / 32;
             int nextTile = level[nextX + nextY * 18];
 
             if (nextTile != 0) { /* do nothing */ }
             else {
+                move[RIGHT] = false;
+                move[UP] = false;
+                move[DOWN] = false;
                 move[LEFT] = true;
                 walking = true;
             }
@@ -153,10 +152,12 @@ void character::keymove()
 
             if (nextTile != 0) { /* do nothing */ }
             else {
+                move[UP] = false;
+                move[DOWN] = false;
+                move[LEFT] = false;
                 move[RIGHT] = true;
                 walking = true;
             }
-
         }
     }
 }
@@ -166,11 +167,14 @@ void character::moving()
     {
         if(move[UP] == true)
         {
+            nextspot = y - tilesize;
             y -= movespeed;
+
+            int nextX = x / 32;
+            int nextY = (y / 32) - 1;
+            int nextTile = level[nextX + nextY * 18];
             
-            /* i do <= and not just == because maybe your movespeed has a
-             decimalpoint and then it wont become the same number as nextspot*/
-            if(y <= nextspot)
+            if (nextTile != 0)
             {
                 y = nextspot;
                 walking = false;
@@ -180,18 +184,30 @@ void character::moving()
         
         if(move[DOWN] == true)
         {
+            nextspot = y + tilesize;
             y += movespeed;
-            if(y >= nextspot)
+            
+            int nextX = x / 32;
+            int nextY = (y / 32) + 1;
+            int nextTile = level[nextX + nextY * 18];
+
+            if(nextTile != 0)
             {
-                y = nextspot;
+//                y = nextspot;
                 walking = false;
                 move[DOWN] = false;
             }
         }
         if(move[LEFT] == true)
         {
+            nextspot = x - tilesize;
             x -= movespeed;
-            if(x <= nextspot)
+            
+            int nextX = (x / 32) - 1;
+            int nextY = y / 32;
+            int nextTile = level[nextX + nextY * 18];
+
+            if(nextTile != 0)
             {
                 x = nextspot;
                 walking = false;
@@ -200,10 +216,15 @@ void character::moving()
         }
         if(move[RIGHT] == true)
         {
+            nextspot = x + tilesize;
             x += movespeed;
-            if(x >= nextspot)
+            
+            int nextX = (x / 32) + 1;
+            int nextY = y / 32;
+            int nextTile = level[nextX + nextY * 18];
+            
+            if(nextTile != 0)
             {
-                x = nextspot;
                 walking = false;
                 move[RIGHT] = false;
             }
@@ -274,7 +295,6 @@ int main()
                 dot[x].setOrigin(sf::Vector2f(-10, -10));
                 dot[x].setPosition(xCord, yCord);
                 dot[x].setFillColor(sf::Color(212, 161, 144));
-
             }
         }
     }
@@ -315,7 +335,7 @@ int main()
         // draw text
         window.draw(scoreText);
         
-        // draw win text if everything is collected
+        // draw winText if everything is collected
         if (scoreInt == 1350) {
             window.draw(winText);
         }
