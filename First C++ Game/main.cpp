@@ -27,7 +27,7 @@ sf::RenderWindow window(sf::VideoMode(576, 544), "pacman");
 sf::Event event;
 
 int tilesize = 32;
-const int level[] =
+const int tiles[] =
 {
     9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
     9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
@@ -89,7 +89,7 @@ void character::keymove()
         {
             int nextX = x / 32;
             int nextY = (y / 32) - 1;
-            int nextTile = level[nextX + nextY * 18];
+            int nextTile = tiles[nextX + nextY * 18];
 
             if (nextTile != 0) { /* do nothing */ }
             else if (move[UP] != true){
@@ -108,7 +108,7 @@ void character::keymove()
         {
             int nextX = x / 32;
             int nextY = (y / 32) + 1;
-            int nextTile = level[nextX + nextY * 18];
+            int nextTile = tiles[nextX + nextY * 18];
 
             if (nextTile != 0) { /* do nothing */ }
             else {
@@ -127,7 +127,7 @@ void character::keymove()
         {
             int nextX = (x / 32) - 1;
             int nextY = y / 32;
-            int nextTile = level[nextX + nextY * 18];
+            int nextTile = tiles[nextX + nextY * 18];
 
             if (nextTile != 0) { /* do nothing */ }
             else {
@@ -148,7 +148,7 @@ void character::keymove()
             
             int nextX = (x / 32) + 1;
             int nextY = y / 32;
-            int nextTile = level[nextX + nextY * 18];
+            int nextTile = tiles[nextX + nextY * 18];
 
             if (nextTile != 0) { /* do nothing */ }
             else {
@@ -172,7 +172,7 @@ void character::moving()
 
             int nextX = x / 32;
             int nextY = (y / 32) - 1;
-            int nextTile = level[nextX + nextY * 18];
+            int nextTile = tiles[nextX + nextY * 18];
             
             if (nextTile != 0)
             {
@@ -189,7 +189,7 @@ void character::moving()
             
             int nextX = x / 32;
             int nextY = (y / 32) + 1;
-            int nextTile = level[nextX + nextY * 18];
+            int nextTile = tiles[nextX + nextY * 18];
 
             if(nextTile != 0)
             {
@@ -204,7 +204,7 @@ void character::moving()
             
             int nextX = (x / 32) - 1;
             int nextY = y / 32;
-            int nextTile = level[nextX + nextY * 18];
+            int nextTile = tiles[nextX + nextY * 18];
 
             if(nextTile != 0)
             {
@@ -220,7 +220,7 @@ void character::moving()
             
             int nextX = (x / 32) + 1;
             int nextY = y / 32;
-            int nextTile = level[nextX + nextY * 18];
+            int nextTile = tiles[nextX + nextY * 18];
             
             if(nextTile != 0)
             {
@@ -240,9 +240,9 @@ int main()
     sf::RectangleShape rectangle;
     std::vector<sf::RectangleShape> dot(150, sf::RectangleShape(rectangle));
     
-    // create the tilemap from the level definition
+    // create the tilemap from the tiles definition
     TileMap map;
-    if (!map.load(resourcePath() + "tileset.png", sf::Vector2u(32, 32), level, 18, 17)) {
+    if (!map.load(resourcePath() + "tileset.png", sf::Vector2u(32, 32), tiles, 18, 17)) {
         return -1;
     }
     
@@ -280,7 +280,7 @@ int main()
     int x = 1;
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 17; j++) {
-            int tile = level[i + j * 18];
+            int tile = tiles[i + j * 18];
             
             sf::Vector2f point(i * 32 , j * 32);
             sf::Vector2f pacmanPosition(pacman.x, pacman.y);
