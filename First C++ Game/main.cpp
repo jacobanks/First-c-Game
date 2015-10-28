@@ -193,7 +193,6 @@ void character::moving()
 
             if(nextTile != 0)
             {
-//                y = nextspot;
                 walking = false;
                 move[DOWN] = false;
             }
