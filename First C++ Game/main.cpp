@@ -85,7 +85,7 @@ void character::keymove()
     /*keymove() and moving() functions are working together*/
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        if(walking == false)
+        if(move[UP] == false)
         {
             int nextX = x / 32;
             int nextY = (y / 32) - 1;
@@ -104,7 +104,7 @@ void character::keymove()
     
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        if(walking == false)
+        if(move[DOWN] == false)
         {
             int nextX = x / 32;
             int nextY = (y / 32) + 1;
@@ -123,7 +123,7 @@ void character::keymove()
     
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        if(walking == false)
+        if(move[LEFT] == false)
         {
             int nextX = (x / 32) - 1;
             int nextY = y / 32;
@@ -142,7 +142,7 @@ void character::keymove()
     
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        if(walking == false)
+        if(move[RIGHT] == false)
         {
             nextspot = x + tilesize;
             
@@ -167,6 +167,11 @@ void character::moving()
     {
         if(move[UP] == true)
         {
+            
+            if (move[UP] == false) {
+                y = nextspot;
+            }
+            
             nextspot = y - tilesize;
             y -= movespeed;
 
