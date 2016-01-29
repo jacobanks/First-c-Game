@@ -20,6 +20,7 @@
 #include <iostream>
 #include <math.h>
 
+#include "AnimatedSprite.hpp"
 #include "ResourcePath.hpp"
 #include "TileMap.cpp"
 #include "Collision.hpp"
@@ -64,7 +65,7 @@ public:
             move[i] = false;
         
         walking = false;
-        myrect.setSize(sf::Vector2f(32, 32));
+        myrect.setScale(sf::Vector2f(1, 1));
     }
     
     void keymove(); //keypress detection
@@ -79,7 +80,17 @@ public:
     bool walking;
     int nextspot; //the next tilespot of the map
     
-    sf::RectangleShape myrect;
+    AnimatedSprite myrect;
+    Animation walkingAnimationDown;
+    Animation walkingAnimationUp;
+    Animation walkingAnimationLeft;
+    Animation walkingAnimationRight;
+    Animation walkingAnimationCenter;
+
+    Animation* currentAnimation = &walkingAnimationCenter;
+    
+    bool noKeyWasPressed = true;
+
 };
 
 void character::keymove()
@@ -177,6 +188,8 @@ void character::moving()
         if(move[UP] == true)
         {
             y -= movespeed;
+            currentAnimation = &walkingAnimationUp;
+            noKeyWasPressed = false;
             
             if (y <= nextspot) {
                 
@@ -198,7 +211,9 @@ void character::moving()
         if(move[DOWN] == true)
         {
             y += movespeed;
-            
+            currentAnimation = &walkingAnimationDown;
+            noKeyWasPressed = false;
+
             if (y >= nextspot) {
                 
                 y = nextspot;
@@ -219,7 +234,9 @@ void character::moving()
         if(move[LEFT] == true)
         {
             x -= movespeed;
-            
+            currentAnimation = &walkingAnimationLeft;
+            noKeyWasPressed = false;
+
             if (x <= nextspot) {
 
                 x = nextspot;
@@ -240,7 +257,9 @@ void character::moving()
         if(move[RIGHT] == true)
         {
             x += movespeed;
-            
+            currentAnimation = &walkingAnimationRight;
+            noKeyWasPressed = false;
+
             if (x >= nextspot) {
                 
                 x = nextspot;
@@ -264,7 +283,11 @@ int main()
 {
     window.setVerticalSyncEnabled(true); // 60 fps
     character pacman; // a squared pacman
-    pacman.myrect.setFillColor(sf::Color(255,255,0));
+    
+    sf::Texture pacmanSheet;
+    if (!pacmanSheet.loadFromFile(resourcePath() + "pacmanSheet.png")) {
+        std::cout << "broken" << std::endl;
+    }
     
     sf::RectangleShape rectangle;
     std::vector<sf::RectangleShape> dot(150, sf::RectangleShape(rectangle));
@@ -327,6 +350,38 @@ int main()
         }
     }
     
+    
+    
+    
+    sf::Texture Pacmantexture;
+    if (!Pacmantexture.loadFromFile(resourcePath() + "pacman.png"))
+    {
+        std::cout << "Failed to load player spritesheet!" << std::endl;
+        return 1;
+    }
+    
+    // set up the animations for all four directions (set spritesheet and push frames)
+    pacman.walkingAnimationDown.setSpriteSheet(pacmanSheet);
+    pacman.walkingAnimationDown.addFrame(sf::IntRect(0, 0, 32, 32));
+    pacman.walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
+    
+    pacman.walkingAnimationCenter.setSpriteSheet(Pacmantexture);
+    pacman.walkingAnimationCenter.addFrame(sf::IntRect(0, 0, 32, 32));
+    
+    pacman.walkingAnimationLeft.setSpriteSheet(pacmanSheet);
+    pacman.walkingAnimationLeft.addFrame(sf::IntRect(0, 32, 32, 32));
+    pacman.walkingAnimationLeft.addFrame(sf::IntRect(32, 32, 32, 32));
+    
+    pacman.walkingAnimationRight.setSpriteSheet(pacmanSheet);
+    pacman.walkingAnimationRight.addFrame(sf::IntRect(0, 64, 32, 32));
+    pacman.walkingAnimationRight.addFrame(sf::IntRect(32, 64, 32, 32));
+    
+    pacman.walkingAnimationUp.setSpriteSheet(pacmanSheet);
+    pacman.walkingAnimationUp.addFrame(sf::IntRect(0, 96, 32, 32));
+    pacman.walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
+    
+    sf::Clock frameClock;
+    
     while(window.isOpen())
     {
         while(window.pollEvent(event))
@@ -337,6 +392,22 @@ int main()
         pacman.keymove();
         pacman.moving();
         pacman.myrect.setPosition(pacman.x, pacman.y);
+        
+        
+        sf::Time frameTime = frameClock.restart();
+        
+        pacman.myrect.play(*pacman.currentAnimation);
+        
+        // if no key was pressed stop the animation
+        if (pacman.noKeyWasPressed)
+        {
+            pacman.myrect.stop();
+        }
+        pacman.noKeyWasPressed = true;
+        
+        // update AnimatedSprite
+        pacman.myrect.update(frameTime);
+
         
         window.clear();
         
@@ -357,6 +428,7 @@ int main()
             window.draw(dot[i]);
         }
         
+        
         // draw pacman
         window.draw(pacman.myrect);
 
@@ -364,7 +436,7 @@ int main()
         window.draw(scoreText);
         
         // draw winText if everything is collected
-        if (scoreInt == 1350) {
+        if (scoreInt == 1420) {
             window.draw(winText);
         }
         

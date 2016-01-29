@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16100F3C1C5B3E1B0043C8F5 /* pacman.png in Resources */ = {isa = PBXBuildFile; fileRef = 16100F331C5B3E1B0043C8F5 /* pacman.png */; };
+		16100F471C5B42A90043C8F5 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16100F451C5B42A90043C8F5 /* Animation.cpp */; };
+		16100F4C1C5B42D50043C8F5 /* AnimatedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16100F4A1C5B42D50043C8F5 /* AnimatedSprite.cpp */; };
+		16100F561C5B51020043C8F5 /* pacmanSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 16100F551C5B51020043C8F5 /* pacmanSheet.png */; };
 		161D9C5C1BBB88D700FD4DFB /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 161D9C5B1BBB88D700FD4DFB /* ResourcePath.mm */; };
 		161D9C5F1BBB88D700FD4DFB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 161D9C5E1BBB88D700FD4DFB /* main.cpp */; };
 		162D164F1BBC9DC10041AD24 /* Collision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 162D164D1BBC9DC10041AD24 /* Collision.cpp */; };
@@ -17,6 +21,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16100F331C5B3E1B0043C8F5 /* pacman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pacman.png; sourceTree = "<group>"; };
+		16100F451C5B42A90043C8F5 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
+		16100F461C5B42A90043C8F5 /* Animation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Animation.hpp; sourceTree = "<group>"; };
+		16100F4A1C5B42D50043C8F5 /* AnimatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimatedSprite.cpp; sourceTree = "<group>"; };
+		16100F4B1C5B42D50043C8F5 /* AnimatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AnimatedSprite.hpp; sourceTree = "<group>"; };
+		16100F551C5B51020043C8F5 /* pacmanSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pacmanSheet.png; sourceTree = "<group>"; };
 		161D9C561BBB88D700FD4DFB /* First C++ Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "First C++ Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		161D9C5A1BBB88D700FD4DFB /* First C++ Game-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "First C++ Game-Info.plist"; sourceTree = "<group>"; };
 		161D9C5B1BBB88D700FD4DFB /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
@@ -42,6 +52,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16100F481C5B42B60043C8F5 /* Sprite Animation */ = {
+			isa = PBXGroup;
+			children = (
+				16100F451C5B42A90043C8F5 /* Animation.cpp */,
+				16100F461C5B42A90043C8F5 /* Animation.hpp */,
+				16100F4A1C5B42D50043C8F5 /* AnimatedSprite.cpp */,
+				16100F4B1C5B42D50043C8F5 /* AnimatedSprite.hpp */,
+			);
+			name = "Sprite Animation";
+			sourceTree = "<group>";
+		};
+		16100F491C5B42BE0043C8F5 /* Collision */ = {
+			isa = PBXGroup;
+			children = (
+				162D164D1BBC9DC10041AD24 /* Collision.cpp */,
+				162D164E1BBC9DC10041AD24 /* Collision.hpp */,
+			);
+			name = Collision;
+			sourceTree = "<group>";
+		};
 		161D9C4C1BBB88D700FD4DFB = {
 			isa = PBXGroup;
 			children = (
@@ -65,8 +95,8 @@
 				161D9C5D1BBB88D700FD4DFB /* ResourcePath.hpp */,
 				163FB72E1BBC729100413329 /* TileMap.cpp */,
 				163FB72F1BBC729100413329 /* TileMap.hpp */,
-				162D164D1BBC9DC10041AD24 /* Collision.cpp */,
-				162D164E1BBC9DC10041AD24 /* Collision.hpp */,
+				16100F491C5B42BE0043C8F5 /* Collision */,
+				16100F481C5B42B60043C8F5 /* Sprite Animation */,
 				161D9C5E1BBB88D700FD4DFB /* main.cpp */,
 				161D9C601BBB88D700FD4DFB /* Resources */,
 				161D9C591BBB88D700FD4DFB /* Supporting Files */,
@@ -85,6 +115,8 @@
 		161D9C601BBB88D700FD4DFB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				16100F551C5B51020043C8F5 /* pacmanSheet.png */,
+				16100F331C5B3E1B0043C8F5 /* pacman.png */,
 				16965ABF1BDDE06F00B3D7B0 /* ARCADECLASSIC.TTF */,
 				163FB7431BBC90B200413329 /* icon.png */,
 				163FB7411BBC8CDB00413329 /* tileset.png */,
@@ -150,6 +182,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				16965AC01BDDE06F00B3D7B0 /* ARCADECLASSIC.TTF in Resources */,
+				16100F561C5B51020043C8F5 /* pacmanSheet.png in Resources */,
+				16100F3C1C5B3E1B0043C8F5 /* pacman.png in Resources */,
 				163FB7441BBC90B200413329 /* icon.png in Resources */,
 				163FB7421BBC8CDB00413329 /* tileset.png in Resources */,
 			);
@@ -179,9 +213,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				161D9C5F1BBB88D700FD4DFB /* main.cpp in Sources */,
+				16100F4C1C5B42D50043C8F5 /* AnimatedSprite.cpp in Sources */,
 				163FB7301BBC729100413329 /* TileMap.cpp in Sources */,
 				162D164F1BBC9DC10041AD24 /* Collision.cpp in Sources */,
 				161D9C5C1BBB88D700FD4DFB /* ResourcePath.mm in Sources */,
+				16100F471C5B42A90043C8F5 /* Animation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
