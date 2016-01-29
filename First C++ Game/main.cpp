@@ -18,12 +18,13 @@
 #include <SFML/Graphics.hpp>
 #include <cstdlib>
 #include <iostream>
+#include <math.h>
 
 #include "ResourcePath.hpp"
 #include "TileMap.cpp"
 #include "Collision.hpp"
 
-sf::RenderWindow window(sf::VideoMode(576, 544), "pacman");
+sf::RenderWindow window(sf::VideoMode(576, 576), "pacman");
 sf::Event event;
 
 int tilesize = 32;
@@ -43,6 +44,7 @@ const int tiles[] =
     9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
     9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
     9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
+    9, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 5, 0, 5, 5, 0, 9,
     9, 0,11, 0, 4, 3, 0,11, 0, 4, 3, 0,11, 0, 4, 3, 0, 9,
     9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
     9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
@@ -53,12 +55,12 @@ class character
 public:
     character()
     {
-        x = 256;
-        y = 288;
+        x = 32;
+        y = 32;
         
         movespeed = 80.0 / tilesize;
         
-        for(int i = 0; i < 4; ++i) //initialize the all move booleans to false
+        for(int i = 0; i < 4; ++i) //initialize all move booleans to false
             move[i] = false;
         
         walking = false;
@@ -82,10 +84,10 @@ public:
 
 void character::keymove()
 {
-    /*keymove() and moving() functions are working together*/
+    /*keymove() and moving() functions are working together */
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        if(move[UP] == false)
+        if(move[UP] == false && fmod(x, 32) == 0 && fmod(y, 32) == 0)
         {
             int nextX = x / 32;
             int nextY = (y / 32) - 1;
@@ -93,6 +95,8 @@ void character::keymove()
 
             if (nextTile != 0) { /* do nothing */ }
             else if (move[UP] != true){
+                nextspot = y - tilesize;
+
                 move[DOWN] = false;
                 move[LEFT] = false;
                 move[RIGHT] = false;
@@ -104,7 +108,7 @@ void character::keymove()
     
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        if(move[DOWN] == false)
+        if(move[DOWN] == false && fmod(x, 32) == 0 && fmod(y, 32) == 0)
         {
             int nextX = x / 32;
             int nextY = (y / 32) + 1;
@@ -112,6 +116,8 @@ void character::keymove()
 
             if (nextTile != 0) { /* do nothing */ }
             else {
+                nextspot = y + tilesize;
+
                 move[LEFT] = false;
                 move[RIGHT] = false;
                 move[UP] = false;
@@ -123,7 +129,7 @@ void character::keymove()
     
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        if(move[LEFT] == false)
+        if(move[LEFT] == false && fmod(x, 32) == 0 && fmod(y, 32) == 0)
         {
             int nextX = (x / 32) - 1;
             int nextY = y / 32;
@@ -131,6 +137,8 @@ void character::keymove()
 
             if (nextTile != 0) { /* do nothing */ }
             else {
+                nextspot = x - tilesize;
+
                 move[RIGHT] = false;
                 move[UP] = false;
                 move[DOWN] = false;
@@ -142,16 +150,16 @@ void character::keymove()
     
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        if(move[RIGHT] == false)
+        if(move[RIGHT] == false && fmod(x, 32) == 0 && fmod(y, 32) == 0)
         {
-            nextspot = x + tilesize;
-            
             int nextX = (x / 32) + 1;
             int nextY = y / 32;
             int nextTile = tiles[nextX + nextY * 18];
 
             if (nextTile != 0) { /* do nothing */ }
             else {
+                nextspot = x + tilesize;
+
                 move[UP] = false;
                 move[DOWN] = false;
                 move[LEFT] = false;
@@ -161,76 +169,92 @@ void character::keymove()
         }
     }
 }
+
 void character::moving()
 {
     if(walking == true)
     {
         if(move[UP] == true)
         {
-            
-            if (move[UP] == false) {
-                y = nextspot;
-            }
-            
-            nextspot = y - tilesize;
             y -= movespeed;
-
-            int nextX = x / 32;
-            int nextY = (y / 32) - 1;
-            int nextTile = tiles[nextX + nextY * 18];
             
-            if (nextTile != 0)
-            {
+            if (y <= nextspot) {
+                
                 y = nextspot;
-                walking = false;
-                move[UP] = false;
+                nextspot = y - tilesize;
+                
+                int nextX = x / 32;
+                int nextY = (y / 32) - 1;
+                int nextTile = tiles[nextX + nextY * 18];
+                
+                if (nextTile != 0)
+                {
+                    walking = false;
+                    move[UP] = false;
+                }
             }
         }
         
         if(move[DOWN] == true)
         {
-            nextspot = y + tilesize;
             y += movespeed;
             
-            int nextX = x / 32;
-            int nextY = (y / 32) + 1;
-            int nextTile = tiles[nextX + nextY * 18];
+            if (y >= nextspot) {
+                
+                y = nextspot;
+                nextspot = y + tilesize;
+                
+                int nextX = x / 32;
+                int nextY = (y / 32) + 1;
+                int nextTile = tiles[nextX + nextY * 18];
 
-            if(nextTile != 0)
-            {
-                walking = false;
-                move[DOWN] = false;
+                if(nextTile != 0)
+                {
+                    walking = false;
+                    move[DOWN] = false;
+                }
             }
         }
+        
         if(move[LEFT] == true)
         {
-            nextspot = x - tilesize;
             x -= movespeed;
             
-            int nextX = (x / 32) - 1;
-            int nextY = y / 32;
-            int nextTile = tiles[nextX + nextY * 18];
+            if (x <= nextspot) {
 
-            if(nextTile != 0)
-            {
                 x = nextspot;
-                walking = false;
-                move[LEFT] = false;
+                nextspot = x - tilesize;
+                
+                int nextX = (x / 32) - 1;
+                int nextY = y / 32;
+                int nextTile = tiles[nextX + nextY * 18];
+                
+                if(nextTile != 0)
+                {
+                    walking = false;
+                    move[LEFT] = false;
+                }
             }
         }
+        
         if(move[RIGHT] == true)
         {
-            nextspot = x + tilesize;
             x += movespeed;
             
-            int nextX = (x / 32) + 1;
-            int nextY = y / 32;
-            int nextTile = tiles[nextX + nextY * 18];
+            if (x >= nextspot) {
+                
+                x = nextspot;
+                nextspot = x + tilesize;
+                
+                int nextX = (x / 32) + 1;
+                int nextY = y / 32;
+                int nextTile = tiles[nextX + nextY * 18];
             
-            if(nextTile != 0)
-            {
-                walking = false;
-                move[RIGHT] = false;
+                if(nextTile != 0)
+                {
+                    walking = false;
+                    move[RIGHT] = false;
+                }
             }
         }
     }
@@ -247,7 +271,7 @@ int main()
     
     // create the tilemap from the tiles definition
     TileMap map;
-    if (!map.load(resourcePath() + "tileset.png", sf::Vector2u(32, 32), tiles, 18, 17)) {
+    if (!map.load(resourcePath() + "tileset.png", sf::Vector2u(32, 32), tiles, 18, 18)) {
         return -1;
     }
     
@@ -282,26 +306,26 @@ int main()
                    textRect.top  + textRect.height/2.0f);
     winText.setPosition(sf::Vector2f(576/2.0f, 544/2.0f));
     
-    int x = 1;
-    for (int i = 0; i < 18; i++) {
-        for (int j = 0; j < 17; j++) {
-            int tile = tiles[i + j * 18];
-            
-            sf::Vector2f point(i * 32 , j * 32);
-            sf::Vector2f pacmanPosition(pacman.x, pacman.y);
-
-            if (tile == 0 && point != pacmanPosition) {
-                int xCord = i * 32;
-                int yCord = j * 32;
-                x++;
-                
-                dot[x].setSize(sf::Vector2f(10, 10));
-                dot[x].setOrigin(sf::Vector2f(-10, -10));
-                dot[x].setPosition(xCord, yCord);
-                dot[x].setFillColor(sf::Color(212, 161, 144));
-            }
-        }
-    }
+//    int x = 1;
+//    for (int i = 0; i < 18; i++) {
+//        for (int j = 0; j < 18; j++) {
+//            int tile = tiles[i + j * 18];
+//            
+//            sf::Vector2f point(i * 32 , j * 32);
+//            sf::Vector2f pacmanPosition(pacman.x, pacman.y);
+//
+//            if (tile == 0 && point != pacmanPosition) {
+//                int xCord = i * 32;
+//                int yCord = j * 32;
+//                x++;
+//                
+//                dot[x].setSize(sf::Vector2f(10, 10));
+//                dot[x].setOrigin(sf::Vector2f(-10, -10));
+//                dot[x].setPosition(xCord, yCord);
+//                dot[x].setFillColor(sf::Color(212, 161, 144));
+//            }
+//        }
+//    }
     
     while(window.isOpen())
     {
@@ -327,7 +351,7 @@ int main()
                     scoreInt += 10;
                     scoreText.setString(std::to_string(scoreInt));
                 }
-                dot[i].setFillColor(sf::Color::Transparent);
+                dot[i].setFillColor(sf::Color::Red);
             }
             
             window.draw(dot[i]);
