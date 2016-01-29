@@ -318,9 +318,6 @@ int main()
     
     sf::Clock frameClock;
     
-    sf::RectangleShape rectangle;
-    std::vector<sf::RectangleShape> dot(150, sf::RectangleShape(rectangle));
-    
     // create the tilemap from the tiles definition
     TileMap map;
     if (!map.load(resourcePath() + "tileset.png", sf::Vector2u(32, 32), tiles, 18, 18)) {
@@ -358,6 +355,9 @@ int main()
                    textRect.top  + textRect.height/2.0f);
     winText.setPosition(sf::Vector2f(576/2.0f, 544/2.0f));
     
+    sf::CircleShape circle;
+    std::vector<sf::CircleShape> dot(150, sf::CircleShape(circle));
+    
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 18; j++) {
             int tile = tiles[i + j * 18];
@@ -372,7 +372,7 @@ int main()
                 
                 x++;
                 
-                dot[x].setSize(sf::Vector2f(10, 10));
+                dot[x].setRadius(4);
                 dot[x].setOrigin(sf::Vector2f(-10, -10));
                 dot[x].setPosition(xCord, yCord);
                 dot[x].setFillColor(sf::Color(212, 161, 144));
