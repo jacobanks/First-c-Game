@@ -24,6 +24,7 @@
 #include "ResourcePath.hpp"
 #include "TileMap.cpp"
 #include "Collision.hpp"
+#include "Monster.hpp"
 
 sf::RenderWindow window(sf::VideoMode(576, 576), "pacman");
 sf::Event event;
@@ -316,6 +317,29 @@ int main()
     pacman.walkingAnimationUp.addFrame(sf::IntRect(0, 96, 32, 32));
     pacman.walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
     
+    Monster monster;
+    
+    monster.walkingAnimationDown.setSpriteSheet(pacmanSheet);
+    monster.walkingAnimationDown.addFrame(sf::IntRect(0, 0, 32, 32));
+    monster.walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
+    
+    monster.walkingAnimationCenter.setSpriteSheet(Pacmantexture);
+    monster.walkingAnimationCenter.addFrame(sf::IntRect(0, 0, 32, 32));
+    
+    monster.walkingAnimationLeft.setSpriteSheet(pacmanSheet);
+    monster.walkingAnimationLeft.addFrame(sf::IntRect(0, 32, 32, 32));
+    monster.walkingAnimationLeft.addFrame(sf::IntRect(32, 32, 32, 32));
+    
+    monster.walkingAnimationRight.setSpriteSheet(pacmanSheet);
+    monster.walkingAnimationRight.addFrame(sf::IntRect(0, 64, 32, 32));
+    monster.walkingAnimationRight.addFrame(sf::IntRect(32, 64, 32, 32));
+    
+    monster.walkingAnimationUp.setSpriteSheet(pacmanSheet);
+    monster.walkingAnimationUp.addFrame(sf::IntRect(0, 96, 32, 32));
+    monster.walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
+    
+    monster.currentAnimation = &monster.walkingAnimationDown;
+
     sf::Clock frameClock;
     
     // create the tilemap from the tiles definition
@@ -376,6 +400,10 @@ int main()
                 dot[x].setOrigin(sf::Vector2f(-10, -10));
                 dot[x].setPosition(xCord, yCord);
                 dot[x].setFillColor(sf::Color(212, 161, 144));
+                
+                if (dot[x].getPosition() == sf::Vector2f(32, 32) || dot[x].getPosition() == sf::Vector2f(32, 512) || dot[x].getPosition() == sf::Vector2f(512, 32) || dot[x].getPosition() == sf::Vector2f(512, 512)) {
+                    dot[x].setRadius(8);
+                }
             }
         }
     }
@@ -395,6 +423,11 @@ int main()
         sf::Time frameTime = frameClock.restart();
         
         pacman.myrect.play(*pacman.currentAnimation);
+        
+        monster.sprite.play(*monster.currentAnimation);
+        monster.moving();
+        monster.sprite.setPosition(monster.x, monster.y);
+//        monster.move[Monster::DOWN] = true;
         
         // if no key was pressed stop the animation
         if (pacman.noKeyWasPressed)
@@ -417,7 +450,12 @@ int main()
         {
             if (Collision::intersects(pacman.myrect.getGlobalBounds(), dot[i].getGlobalBounds())) {
                 if (dot[i].getFillColor() != sf::Color::Transparent) {
-                    scoreInt += 10;
+                    if (dot[i].getRadius() == 8) {
+                        scoreInt += 50;
+                    } else {
+                        scoreInt += 10;
+                    }
+
                     scoreText.setString(std::to_string(scoreInt));
                 }
                 dot[i].setFillColor(sf::Color::Transparent);
@@ -429,12 +467,13 @@ int main()
         
         // draw pacman
         window.draw(pacman.myrect);
+        window.draw(monster.sprite);
 
         // draw text
         window.draw(scoreText);
         
         // draw winText if everything is collected
-        if (scoreInt == 1420) {
+        if (scoreInt == 1580) {
             window.draw(winText);
         }
         

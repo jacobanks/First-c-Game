@@ -18,6 +18,7 @@
 		163FB7421BBC8CDB00413329 /* tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 163FB7411BBC8CDB00413329 /* tileset.png */; };
 		163FB7441BBC90B200413329 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 163FB7431BBC90B200413329 /* icon.png */; };
 		16965AC01BDDE06F00B3D7B0 /* ARCADECLASSIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 16965ABF1BDDE06F00B3D7B0 /* ARCADECLASSIC.TTF */; };
+		16C1BD371C5BEFD6004F0823 /* Monster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C1BD351C5BEFD6004F0823 /* Monster.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,8 @@
 		163FB7411BBC8CDB00413329 /* tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileset.png; sourceTree = "<group>"; };
 		163FB7431BBC90B200413329 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		16965ABF1BDDE06F00B3D7B0 /* ARCADECLASSIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = ARCADECLASSIC.TTF; sourceTree = "<group>"; };
+		16C1BD351C5BEFD6004F0823 /* Monster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Monster.cpp; sourceTree = "<group>"; };
+		16C1BD361C5BEFD6004F0823 /* Monster.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Monster.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +100,7 @@
 				163FB72F1BBC729100413329 /* TileMap.hpp */,
 				16100F491C5B42BE0043C8F5 /* Collision */,
 				16100F481C5B42B60043C8F5 /* Sprite Animation */,
+				16C1BD381C5BEFE2004F0823 /* Monsters */,
 				161D9C5E1BBB88D700FD4DFB /* main.cpp */,
 				161D9C601BBB88D700FD4DFB /* Resources */,
 				161D9C591BBB88D700FD4DFB /* Supporting Files */,
@@ -122,6 +126,15 @@
 				163FB7411BBC8CDB00413329 /* tileset.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		16C1BD381C5BEFE2004F0823 /* Monsters */ = {
+			isa = PBXGroup;
+			children = (
+				16C1BD351C5BEFD6004F0823 /* Monster.cpp */,
+				16C1BD361C5BEFD6004F0823 /* Monster.hpp */,
+			);
+			name = Monsters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +228,7 @@
 				161D9C5F1BBB88D700FD4DFB /* main.cpp in Sources */,
 				16100F4C1C5B42D50043C8F5 /* AnimatedSprite.cpp in Sources */,
 				163FB7301BBC729100413329 /* TileMap.cpp in Sources */,
+				16C1BD371C5BEFD6004F0823 /* Monster.cpp in Sources */,
 				162D164F1BBC9DC10041AD24 /* Collision.cpp in Sources */,
 				161D9C5C1BBB88D700FD4DFB /* ResourcePath.mm in Sources */,
 				16100F471C5B42A90043C8F5 /* Animation.cpp in Sources */,
