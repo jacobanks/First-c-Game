@@ -289,6 +289,35 @@ int main()
         std::cout << "broken" << std::endl;
     }
     
+    sf::Texture Pacmantexture;
+    if (!Pacmantexture.loadFromFile(resourcePath() + "pacman.png"))
+    {
+        std::cout << "Failed to load player spritesheet!" << std::endl;
+        return 1;
+    }
+    
+    // set up the animations for all four directions (set spritesheet and push frames)
+    pacman.walkingAnimationDown.setSpriteSheet(pacmanSheet);
+    pacman.walkingAnimationDown.addFrame(sf::IntRect(0, 0, 32, 32));
+    pacman.walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
+    
+    pacman.walkingAnimationCenter.setSpriteSheet(Pacmantexture);
+    pacman.walkingAnimationCenter.addFrame(sf::IntRect(0, 0, 32, 32));
+    
+    pacman.walkingAnimationLeft.setSpriteSheet(pacmanSheet);
+    pacman.walkingAnimationLeft.addFrame(sf::IntRect(0, 32, 32, 32));
+    pacman.walkingAnimationLeft.addFrame(sf::IntRect(32, 32, 32, 32));
+    
+    pacman.walkingAnimationRight.setSpriteSheet(pacmanSheet);
+    pacman.walkingAnimationRight.addFrame(sf::IntRect(0, 64, 32, 32));
+    pacman.walkingAnimationRight.addFrame(sf::IntRect(32, 64, 32, 32));
+    
+    pacman.walkingAnimationUp.setSpriteSheet(pacmanSheet);
+    pacman.walkingAnimationUp.addFrame(sf::IntRect(0, 96, 32, 32));
+    pacman.walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
+    
+    sf::Clock frameClock;
+    
     sf::RectangleShape rectangle;
     std::vector<sf::RectangleShape> dot(150, sf::RectangleShape(rectangle));
     
@@ -329,7 +358,6 @@ int main()
                    textRect.top  + textRect.height/2.0f);
     winText.setPosition(sf::Vector2f(576/2.0f, 544/2.0f));
     
-    int x = 1;
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 18; j++) {
             int tile = tiles[i + j * 18];
@@ -340,6 +368,8 @@ int main()
             if (tile == 0 && point != pacmanPosition) {
                 int xCord = i * 32;
                 int yCord = j * 32;
+                static int x = 1;
+                
                 x++;
                 
                 dot[x].setSize(sf::Vector2f(10, 10));
@@ -349,38 +379,6 @@ int main()
             }
         }
     }
-    
-    
-    
-    
-    sf::Texture Pacmantexture;
-    if (!Pacmantexture.loadFromFile(resourcePath() + "pacman.png"))
-    {
-        std::cout << "Failed to load player spritesheet!" << std::endl;
-        return 1;
-    }
-    
-    // set up the animations for all four directions (set spritesheet and push frames)
-    pacman.walkingAnimationDown.setSpriteSheet(pacmanSheet);
-    pacman.walkingAnimationDown.addFrame(sf::IntRect(0, 0, 32, 32));
-    pacman.walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
-    
-    pacman.walkingAnimationCenter.setSpriteSheet(Pacmantexture);
-    pacman.walkingAnimationCenter.addFrame(sf::IntRect(0, 0, 32, 32));
-    
-    pacman.walkingAnimationLeft.setSpriteSheet(pacmanSheet);
-    pacman.walkingAnimationLeft.addFrame(sf::IntRect(0, 32, 32, 32));
-    pacman.walkingAnimationLeft.addFrame(sf::IntRect(32, 32, 32, 32));
-    
-    pacman.walkingAnimationRight.setSpriteSheet(pacmanSheet);
-    pacman.walkingAnimationRight.addFrame(sf::IntRect(0, 64, 32, 32));
-    pacman.walkingAnimationRight.addFrame(sf::IntRect(32, 64, 32, 32));
-    
-    pacman.walkingAnimationUp.setSpriteSheet(pacmanSheet);
-    pacman.walkingAnimationUp.addFrame(sf::IntRect(0, 96, 32, 32));
-    pacman.walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
-    
-    sf::Clock frameClock;
     
     while(window.isOpen())
     {
