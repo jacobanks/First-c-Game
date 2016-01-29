@@ -55,8 +55,8 @@ class character
 public:
     character()
     {
-        x = 32;
-        y = 32;
+        x = 256;
+        y = 288;
         
         movespeed = 80.0 / tilesize;
         
