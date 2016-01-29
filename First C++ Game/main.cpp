@@ -298,7 +298,7 @@ int main()
     
     sf::Text winText;
     winText.setFont(arcadeFont);
-    winText.setString("Game Over! You Win!");
+    winText.setString("You Win!");
     winText.setCharacterSize(45);
     winText.setColor(sf::Color::White);
     sf::FloatRect textRect = winText.getLocalBounds();
@@ -306,26 +306,26 @@ int main()
                    textRect.top  + textRect.height/2.0f);
     winText.setPosition(sf::Vector2f(576/2.0f, 544/2.0f));
     
-//    int x = 1;
-//    for (int i = 0; i < 18; i++) {
-//        for (int j = 0; j < 18; j++) {
-//            int tile = tiles[i + j * 18];
-//            
-//            sf::Vector2f point(i * 32 , j * 32);
-//            sf::Vector2f pacmanPosition(pacman.x, pacman.y);
-//
-//            if (tile == 0 && point != pacmanPosition) {
-//                int xCord = i * 32;
-//                int yCord = j * 32;
-//                x++;
-//                
-//                dot[x].setSize(sf::Vector2f(10, 10));
-//                dot[x].setOrigin(sf::Vector2f(-10, -10));
-//                dot[x].setPosition(xCord, yCord);
-//                dot[x].setFillColor(sf::Color(212, 161, 144));
-//            }
-//        }
-//    }
+    int x = 1;
+    for (int i = 0; i < 18; i++) {
+        for (int j = 0; j < 18; j++) {
+            int tile = tiles[i + j * 18];
+            
+            sf::Vector2f point(i * 32 , j * 32);
+            sf::Vector2f pacmanPosition(pacman.x, pacman.y);
+
+            if (tile == 0 && point != pacmanPosition) {
+                int xCord = i * 32;
+                int yCord = j * 32;
+                x++;
+                
+                dot[x].setSize(sf::Vector2f(10, 10));
+                dot[x].setOrigin(sf::Vector2f(-10, -10));
+                dot[x].setPosition(xCord, yCord);
+                dot[x].setFillColor(sf::Color(212, 161, 144));
+            }
+        }
+    }
     
     while(window.isOpen())
     {
@@ -351,7 +351,7 @@ int main()
                     scoreInt += 10;
                     scoreText.setString(std::to_string(scoreInt));
                 }
-                dot[i].setFillColor(sf::Color::Red);
+                dot[i].setFillColor(sf::Color::Transparent);
             }
             
             window.draw(dot[i]);
