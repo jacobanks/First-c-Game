@@ -14,6 +14,7 @@
 		161D9C5C1BBB88D700FD4DFB /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 161D9C5B1BBB88D700FD4DFB /* ResourcePath.mm */; };
 		161D9C5F1BBB88D700FD4DFB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 161D9C5E1BBB88D700FD4DFB /* main.cpp */; };
 		162D164F1BBC9DC10041AD24 /* Collision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 162D164D1BBC9DC10041AD24 /* Collision.cpp */; };
+		162D34B31C86206B00680FBA /* Pacman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 162D34B11C86206B00680FBA /* Pacman.cpp */; };
 		163FB7301BBC729100413329 /* TileMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 163FB72E1BBC729100413329 /* TileMap.cpp */; };
 		163FB7421BBC8CDB00413329 /* tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 163FB7411BBC8CDB00413329 /* tileset.png */; };
 		163FB7441BBC90B200413329 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 163FB7431BBC90B200413329 /* icon.png */; };
@@ -35,6 +36,8 @@
 		161D9C5E1BBB88D700FD4DFB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		162D164D1BBC9DC10041AD24 /* Collision.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Collision.cpp; sourceTree = "<group>"; };
 		162D164E1BBC9DC10041AD24 /* Collision.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Collision.hpp; sourceTree = "<group>"; };
+		162D34B11C86206B00680FBA /* Pacman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pacman.cpp; sourceTree = "<group>"; };
+		162D34B21C86206B00680FBA /* Pacman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Pacman.hpp; sourceTree = "<group>"; };
 		163FB72E1BBC729100413329 /* TileMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileMap.cpp; sourceTree = "<group>"; };
 		163FB72F1BBC729100413329 /* TileMap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TileMap.hpp; sourceTree = "<group>"; };
 		163FB7411BBC8CDB00413329 /* tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileset.png; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 				16100F491C5B42BE0043C8F5 /* Collision */,
 				16100F481C5B42B60043C8F5 /* Sprite Animation */,
 				16C1BD381C5BEFE2004F0823 /* Monsters */,
+				162D34B41C86207200680FBA /* Player */,
 				161D9C5E1BBB88D700FD4DFB /* main.cpp */,
 				161D9C601BBB88D700FD4DFB /* Resources */,
 				161D9C591BBB88D700FD4DFB /* Supporting Files */,
@@ -126,6 +130,15 @@
 				163FB7411BBC8CDB00413329 /* tileset.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		162D34B41C86207200680FBA /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				162D34B11C86206B00680FBA /* Pacman.cpp */,
+				162D34B21C86206B00680FBA /* Pacman.hpp */,
+			);
+			name = Player;
 			sourceTree = "<group>";
 		};
 		16C1BD381C5BEFE2004F0823 /* Monsters */ = {
@@ -228,6 +241,7 @@
 				161D9C5F1BBB88D700FD4DFB /* main.cpp in Sources */,
 				16100F4C1C5B42D50043C8F5 /* AnimatedSprite.cpp in Sources */,
 				163FB7301BBC729100413329 /* TileMap.cpp in Sources */,
+				162D34B31C86206B00680FBA /* Pacman.cpp in Sources */,
 				16C1BD371C5BEFD6004F0823 /* Monster.cpp in Sources */,
 				162D164F1BBC9DC10041AD24 /* Collision.cpp in Sources */,
 				161D9C5C1BBB88D700FD4DFB /* ResourcePath.mm in Sources */,
