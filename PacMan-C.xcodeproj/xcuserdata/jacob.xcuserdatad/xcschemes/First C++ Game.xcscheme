@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "161D9C551BBB88D700FD4DFB"
-               BuildableName = "First C++ Game.app"
-               BlueprintName = "First C++ Game"
-               ReferencedContainer = "container:First C++ Game.xcodeproj">
+               BuildableName = "PacMan-C.app"
+               BlueprintName = "PacMan-C"
+               ReferencedContainer = "container:PacMan-C.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "161D9C551BBB88D700FD4DFB"
-            BuildableName = "First C++ Game.app"
-            BlueprintName = "First C++ Game"
-            ReferencedContainer = "container:First C++ Game.xcodeproj">
+            BuildableName = "PacMan-C.app"
+            BlueprintName = "PacMan-C"
+            ReferencedContainer = "container:PacMan-C.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "161D9C551BBB88D700FD4DFB"
-            BuildableName = "First C++ Game.app"
-            BlueprintName = "First C++ Game"
-            ReferencedContainer = "container:First C++ Game.xcodeproj">
+            BuildableName = "PacMan-C.app"
+            BlueprintName = "PacMan-C"
+            ReferencedContainer = "container:PacMan-C.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "161D9C551BBB88D700FD4DFB"
-            BuildableName = "First C++ Game.app"
-            BlueprintName = "First C++ Game"
-            ReferencedContainer = "container:First C++ Game.xcodeproj">
+            BuildableName = "PacMan-C.app"
+            BlueprintName = "PacMan-C"
+            ReferencedContainer = "container:PacMan-C.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

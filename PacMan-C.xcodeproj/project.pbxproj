@@ -29,8 +29,8 @@
 		16100F4A1C5B42D50043C8F5 /* AnimatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimatedSprite.cpp; sourceTree = "<group>"; };
 		16100F4B1C5B42D50043C8F5 /* AnimatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AnimatedSprite.hpp; sourceTree = "<group>"; };
 		16100F551C5B51020043C8F5 /* pacmanSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pacmanSheet.png; sourceTree = "<group>"; };
-		161D9C561BBB88D700FD4DFB /* First C++ Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "First C++ Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		161D9C5A1BBB88D700FD4DFB /* First C++ Game-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "First C++ Game-Info.plist"; sourceTree = "<group>"; };
+		161D9C561BBB88D700FD4DFB /* PacMan-C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PacMan-C.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		161D9C5A1BBB88D700FD4DFB /* PacMan-C-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PacMan-C-Info.plist"; sourceTree = "<group>"; };
 		161D9C5B1BBB88D700FD4DFB /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		161D9C5D1BBB88D700FD4DFB /* ResourcePath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		161D9C5E1BBB88D700FD4DFB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		161D9C571BBB88D700FD4DFB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				161D9C561BBB88D700FD4DFB /* First C++ Game.app */,
+				161D9C561BBB88D700FD4DFB /* PacMan-C.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,7 +115,7 @@
 		161D9C591BBB88D700FD4DFB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				161D9C5A1BBB88D700FD4DFB /* First C++ Game-Info.plist */,
+				161D9C5A1BBB88D700FD4DFB /* PacMan-C-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -153,9 +153,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		161D9C551BBB88D700FD4DFB /* First C++ Game */ = {
+		161D9C551BBB88D700FD4DFB /* PacMan-C */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 161D9C6B1BBB88D700FD4DFB /* Build configuration list for PBXNativeTarget "First C++ Game" */;
+			buildConfigurationList = 161D9C6B1BBB88D700FD4DFB /* Build configuration list for PBXNativeTarget "PacMan-C" */;
 			buildPhases = (
 				161D9C511BBB88D700FD4DFB /* Sources */,
 				161D9C521BBB88D700FD4DFB /* Frameworks */,
@@ -166,9 +166,9 @@
 			);
 			dependencies = (
 			);
-			name = "First C++ Game";
+			name = "PacMan-C";
 			productName = "First C++ Game";
-			productReference = 161D9C561BBB88D700FD4DFB /* First C++ Game.app */;
+			productReference = 161D9C561BBB88D700FD4DFB /* PacMan-C.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -185,7 +185,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 161D9C501BBB88D700FD4DFB /* Build configuration list for PBXProject "First C++ Game" */;
+			buildConfigurationList = 161D9C501BBB88D700FD4DFB /* Build configuration list for PBXProject "PacMan-C" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -197,7 +197,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				161D9C551BBB88D700FD4DFB /* First C++ Game */,
+				161D9C551BBB88D700FD4DFB /* PacMan-C */,
 			);
 		};
 /* End PBXProject section */
@@ -374,10 +374,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "First C++ Game/First C++ Game-Info.plist";
+				INFOPLIST_FILE = "First C++ Game/PacMan-C-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jacobanks.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "PacMan-C";
 			};
 			name = Debug;
 		};
@@ -385,17 +385,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "First C++ Game/First C++ Game-Info.plist";
+				INFOPLIST_FILE = "First C++ Game/PacMan-C-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jacobanks.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "PacMan-C";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		161D9C501BBB88D700FD4DFB /* Build configuration list for PBXProject "First C++ Game" */ = {
+		161D9C501BBB88D700FD4DFB /* Build configuration list for PBXProject "PacMan-C" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				161D9C691BBB88D700FD4DFB /* Debug */,
@@ -404,7 +404,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		161D9C6B1BBB88D700FD4DFB /* Build configuration list for PBXNativeTarget "First C++ Game" */ = {
+		161D9C6B1BBB88D700FD4DFB /* Build configuration list for PBXNativeTarget "PacMan-C" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				161D9C6C1BBB88D700FD4DFB /* Debug */,
